@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, FlatList, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { CheckBox, Icon } from 'native-base';
 
 class Task1 extends Component {
     constructor(){
@@ -16,14 +17,35 @@ class Task1 extends Component {
     }
     renderItem = ({item, index})=>{
         return (
-            <Text style={styles.item} key={index}>
-                {item.name}
-            </Text>
+            <View  key={index} style={styles.item}>
+                <Text>
+                    {item.name}
+                </Text>
+                <Icon name="trash" style={{padding:5, color:'red'}} onPress={() => this.button(index) } />
+            </View>
+            
         )
     }
     addList = () => {
         this.state.data.push({'name': this.state.input})
         this.setState({input : ''})
+    };
+
+    button(item){
+        Alert.alert(
+            'Delete Item',
+            'Are you sure to delete this item ?',
+            [
+                {text: 'Yes', onPress: ()=> this.deleteList(item)},
+                {text: 'No', onPress: ()=> '', style:'cancel'}
+            ]
+        )
+    }
+    deleteList = (item) => {
+        const new_list = [...this.state.data]
+        new_list.splice(item,1)
+        alert('Success deleted item')
+        this.setState({data:new_list})
     };
     render(){
         return(
@@ -38,7 +60,7 @@ class Task1 extends Component {
                             })
                         }}
                     />
-                    <Button title="Add" onPress={() => this.addList()}/>
+                    <Button style={styles.button} title="Add" onPress={() => this.addList()}/>
                 </View>
                 <View style={styles.container}>
                     <FlatList 
