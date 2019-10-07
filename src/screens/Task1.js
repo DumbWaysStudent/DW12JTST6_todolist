@@ -94,10 +94,24 @@ const styles = StyleSheet.create({
         padding:10
     },
     item:{
+        flexDirection:'row',
+        justifyContent: 'space-between',
         padding:10,
+        fontSize:22,
+        height:55,
+        borderBottomWidth:1
+    },
+    inputText:{
+        flex:1,
+        borderWidth:1,
+        borderRadius:10,
+        paddingHorizontal:10
+    },
+    button:{
+        borderRadius:25,
         fontSize:18,
-        height:44,
-        borderBottomWidth:2
+        backgroundColor: 'rgb(0, 224, 224)',
+        marginHorizontal:10
     }
 });
 export default Task1;
