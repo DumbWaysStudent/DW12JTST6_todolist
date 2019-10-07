@@ -7,17 +7,18 @@ class Task1 extends Component {
         super();
         this.state={
             data:[
-                {name : 'work'},
-                {name : 'swimm'},
-                {name : 'study'},
-                {name : 'sleep'},
-                {name : 'run'},
-            ]
+                {name : 'work', checked: false},
+                {name : 'swimm', checked: false},
+                {name : 'study', checked: false},
+                {name : 'sleep', checked: false},
+                {name : 'run', checked: false},
+            ],
         }
     }
     renderItem = ({item, index})=>{
         return (
             <View  key={index} style={styles.item}>
+                <CheckBox checked={item.checked} onPress= {() => this.checkBoxHandler(index)}/>
                 <Text>
                     {item.name}
                 </Text>
@@ -47,6 +48,12 @@ class Task1 extends Component {
         alert('Success deleted item')
         this.setState({data:new_list})
     };
+    checkBoxHandler=(index)=>{
+        const new_checked = [...this.state.data]
+        new_checked[index].checked = !new_checked[index].checked
+        // alert(new_checked[index].checked)
+        this.setState({data : new_checked})
+    }
     render(){
         return(
             <View style={styles.container}>
